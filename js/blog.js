@@ -100,6 +100,9 @@
     document.querySelectorAll("[data-footer-line]").forEach(function (el) {
       el.textContent = c.footerLine || "";
     });
+    document.querySelectorAll("[data-developer-credit]").forEach(function (el) {
+      el.textContent = c.developerCredit || "";
+    });
     if (document.body && document.body.dataset.page === "home") {
       document.title =
         siteDisplayName() + " — " + (c.homeDocumentTitle || "Log");

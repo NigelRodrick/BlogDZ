@@ -364,3 +364,9 @@ body:not(:has(#newest:target)):not(:has(#popular:target)) section#newest {
   gap: 0.5rem 1rem;
   align-items: center;
 }
+
+.footer-credit {
+  margin: 0.65rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}

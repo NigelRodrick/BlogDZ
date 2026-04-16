@@ -3,7 +3,7 @@
  *  ADMIN: edit this file to run the blog
  * =============================================================================
  *
- *  Site: set BLOG_CONFIG (name, tagline, nav links, footer).
+ *  Site: set BLOG_CONFIG (name, tagline, nav links, footer, developerCredit).
  *  Nav order mirrors jeremydlarson.com: Writing Clips, Photography, Log, About, Contact.
  *  Posts: add objects to BLOG_POSTS (copy the last entry as a template).
  *
@@ -21,6 +21,8 @@ window.BLOG_CONFIG = {
   tagline: "Writer / editor / DJ",
   homeDocumentTitle: "Log",
   footerLine: "© 2026 Dellar Zvinavashe",
+  /** Shown under the copyright line site-wide. */
+  developerCredit: "Developed by Fidinsky Tech Solutions",
   navLinks: [
     { label: "Writing Clips", href: "writing-clips.html" },
     { label: "Photography", href: "photography.html" },
