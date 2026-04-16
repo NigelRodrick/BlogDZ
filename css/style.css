@@ -681,6 +681,7 @@ body:not([data-page="home"]) .site-header-inner {
   font-size: 0.85rem;
   color: var(--ink-faint);
   font-family: var(--font);
+  text-align: center;
 }
 
 .footer-inner a {
@@ -692,12 +693,14 @@ body:not([data-page="home"]) .site-header-inner {
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   align-items: center;
+  justify-content: center;
 }
 
 .footer-credit {
   margin: 0.75rem 0 0;
   font-size: 0.78rem;
   color: var(--ink-faint);
+  text-align: center;
 }
 
 main:not(.blog-main) {
