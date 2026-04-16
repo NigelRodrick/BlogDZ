@@ -4,6 +4,7 @@
  * =============================================================================
  *
  *  Site: set BLOG_CONFIG (name, tagline, nav links, footer).
+ *  Nav order mirrors jeremydlarson.com: Writing Clips, Photography, Log, About, Contact.
  *  Posts: add objects to BLOG_POSTS (copy the last entry as a template).
  *
  *  Each post:
@@ -17,12 +18,15 @@
  */
 window.BLOG_CONFIG = {
   siteName: "Your Name",
-  tagline: "Writer / editor",
+  tagline: "Writer / editor / DJ",
   homeDocumentTitle: "Log",
   footerLine: "© 2026 Your Name",
   navLinks: [
+    { label: "Writing Clips", href: "writing-clips.html" },
+    { label: "Photography", href: "photography.html" },
     { label: "Log", href: "index.html" },
-    { label: "About", href: "posts/about.html" },
+    { label: "About", href: "about.html" },
+    { label: "Contact", href: "contact.html" },
   ],
   popularSlugs: ["on-static-sites", "welcome"],
 };

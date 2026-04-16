@@ -56,13 +56,17 @@
     return sortByNewest(posts());
   }
 
-  /** Nav hrefs in content.js are from site root; fix when page is under posts/. */
-  function resolveNavHref(href) {
-    if (document.body.dataset.page !== "about") return href;
-    if (href === "index.html") return "../index.html";
-    if (href === "posts/about.html") return "about.html";
-    if (href.indexOf("posts/") === 0) return href.replace(/^posts\//, "");
-    return "../" + href;
+  /** Which nav href is “current” (flat URLs from site root). */
+  function navCurrentHref() {
+    var p = document.body && document.body.dataset.page;
+    var map = {
+      home: "index.html",
+      about: "about.html",
+      "writing-clips": "writing-clips.html",
+      photography: "photography.html",
+      contact: "contact.html",
+    };
+    return map[p] || null;
   }
 
   function renderNav() {
@@ -70,13 +74,14 @@
     if (!nav) return;
     var links = cfg().navLinks;
     if (!links || !links.length) return;
+    var current = navCurrentHref();
     nav.replaceChildren();
     links.forEach(function (item) {
       var li = document.createElement("li");
       var a = document.createElement("a");
-      a.href = resolveNavHref(item.href);
+      a.href = item.href;
       a.textContent = item.label;
-      if (item.href === "posts/about.html" && document.body.dataset.page === "about") {
+      if (current && item.href === current) {
         a.setAttribute("aria-current", "page");
       }
       li.appendChild(a);
@@ -99,8 +104,15 @@
       document.title =
         siteDisplayName() + " — " + (c.homeDocumentTitle || "Log");
     }
-    if (document.body && document.body.dataset.page === "about") {
-      document.title = "About — " + siteDisplayName();
+    var p = document.body && document.body.dataset.page;
+    var staticTitles = {
+      about: "About",
+      "writing-clips": "Writing Clips",
+      photography: "Photography",
+      contact: "Contact",
+    };
+    if (p && staticTitles[p]) {
+      document.title = staticTitles[p] + " — " + siteDisplayName();
     }
   }
 
