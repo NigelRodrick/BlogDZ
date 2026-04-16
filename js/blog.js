@@ -9,13 +9,22 @@
     return window.BLOG_POSTS || [];
   }
 
-  function formatDate(iso) {
+  /** Long date, e.g. April 17, 2026 — list + article pages */
+  function formatDateLong(iso) {
     var d = new Date(iso + "T12:00:00");
     return d.toLocaleDateString("en-US", {
-      month: "short",
+      month: "long",
       day: "numeric",
       year: "numeric",
     });
+  }
+
+  function siteDisplayName() {
+    var c = cfg();
+    if (c.siteName && String(c.siteName).trim()) return c.siteName.trim();
+    return (
+      ((c.siteBrand || "") + " " + (c.siteTitleSuffix || "")).trim() || "Site"
+    );
   }
 
   function sortByNewest(list) {
@@ -47,38 +56,58 @@
     return sortByNewest(posts());
   }
 
+  /** Nav hrefs in content.js are from site root; fix when page is under posts/. */
+  function resolveNavHref(href) {
+    if (document.body.dataset.page !== "about") return href;
+    if (href === "index.html") return "../index.html";
+    if (href === "posts/about.html") return "about.html";
+    if (href.indexOf("posts/") === 0) return href.replace(/^posts\//, "");
+    return "../" + href;
+  }
+
+  function renderNav() {
+    var nav = document.getElementById("site-nav");
+    if (!nav) return;
+    var links = cfg().navLinks;
+    if (!links || !links.length) return;
+    nav.replaceChildren();
+    links.forEach(function (item) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = resolveNavHref(item.href);
+      a.textContent = item.label;
+      if (item.href === "posts/about.html" && document.body.dataset.page === "about") {
+        a.setAttribute("aria-current", "page");
+      }
+      li.appendChild(a);
+      nav.appendChild(li);
+    });
+  }
+
   function applyBranding() {
     var c = cfg();
-    document.querySelectorAll("[data-site-brand]").forEach(function (el) {
-      el.textContent = c.siteBrand || "YOUR";
+    document.querySelectorAll("[data-site-name]").forEach(function (el) {
+      el.textContent = siteDisplayName();
     });
-    document.querySelectorAll("[data-site-suffix]").forEach(function (el) {
-      el.textContent = " " + (c.siteTitleSuffix || "Blog");
+    document.querySelectorAll("[data-site-tagline]").forEach(function (el) {
+      el.textContent = c.tagline || "";
     });
     document.querySelectorAll("[data-footer-line]").forEach(function (el) {
       el.textContent = c.footerLine || "";
     });
     if (document.body && document.body.dataset.page === "home") {
       document.title =
-        (c.siteBrand || "Blog").trim() +
-        " " +
-        (c.siteTitleSuffix || "").trim() +
-        " — Home";
+        siteDisplayName() + " — " + (c.homeDocumentTitle || "Log");
+    }
+    if (document.body && document.body.dataset.page === "about") {
+      document.title = "About — " + siteDisplayName();
     }
   }
 
-  function createPostRow(post, filterHash) {
-    var hash = filterHash || "#newest";
+  function createPostRow(post) {
     var li = document.createElement("li");
     var art = document.createElement("article");
     art.className = "post-item";
-
-    var kickerP = document.createElement("p");
-    kickerP.className = "post-kicker";
-    var kickerA = document.createElement("a");
-    kickerA.href = "index.html" + hash;
-    kickerA.textContent = post.kicker || "";
-    kickerP.appendChild(kickerA);
 
     var h2 = document.createElement("h2");
     h2.className = "post-title";
@@ -87,18 +116,9 @@
     titleA.textContent = post.title || "";
     h2.appendChild(titleA);
 
-    var by = document.createElement("p");
-    by.className = "post-byline";
-    var l1 = document.createElement("span");
-    l1.className = "label";
-    l1.textContent = "By";
-    by.appendChild(l1);
-    by.appendChild(document.createTextNode(" " + (post.author || "") + " "));
-    var l2 = document.createElement("span");
-    l2.className = "label";
-    l2.textContent = "on";
-    by.appendChild(l2);
-    by.appendChild(document.createTextNode(" " + formatDate(post.published)));
+    var dateP = document.createElement("p");
+    dateP.className = "post-date";
+    dateP.textContent = formatDateLong(post.published);
 
     var ex = document.createElement("p");
     ex.className = "post-excerpt";
@@ -109,9 +129,8 @@
     rm.textContent = "Read more";
     ex.appendChild(rm);
 
-    art.appendChild(kickerP);
     art.appendChild(h2);
-    art.appendChild(by);
+    art.appendChild(dateP);
     art.appendChild(ex);
     li.appendChild(art);
     return li;
@@ -126,10 +145,10 @@
     popularEl.replaceChildren();
 
     sortByNewest(posts()).forEach(function (post) {
-      newestEl.appendChild(createPostRow(post, "#newest"));
+      newestEl.appendChild(createPostRow(post));
     });
     popularOrder().forEach(function (post) {
-      popularEl.appendChild(createPostRow(post, "#popular"));
+      popularEl.appendChild(createPostRow(post));
     });
   }
 
@@ -149,7 +168,7 @@
       var p = document.createElement("p");
       if (!slug) {
         p.textContent =
-          "Open an article from the home page, or use a link like post.html#welcome.";
+          "Open an article from the log, or use a link like post.html#welcome.";
       } else {
         p.textContent =
           'No post with slug "' + slug + '". Check content.js and the URL.';
@@ -157,9 +176,7 @@
       miss.appendChild(p);
       root.appendChild(miss);
       document.title =
-        (cfg().siteBrand || "Blog") +
-        " — " +
-        (slug ? "Not found" : "Article");
+        siteDisplayName() + " — " + (slug ? "Not found" : "Article");
       return;
     }
 
@@ -168,32 +185,29 @@
     var hdr = document.createElement("header");
     hdr.className = "article-header";
 
-    var kickP = document.createElement("p");
-    kickP.className = "post-kicker";
-    var kickA = document.createElement("a");
-    kickA.href = "index.html#newest";
-    kickA.textContent = post.kicker || "";
-    kickP.appendChild(kickA);
+    if (post.kicker && String(post.kicker).trim()) {
+      var kickP = document.createElement("p");
+      kickP.className = "post-kicker";
+      kickP.textContent = post.kicker.trim();
+      hdr.appendChild(kickP);
+    }
 
     var h1 = document.createElement("h1");
     h1.textContent = post.title || "";
 
-    var by = document.createElement("p");
-    by.className = "post-byline";
-    var s1 = document.createElement("span");
-    s1.className = "label";
-    s1.textContent = "By";
-    by.appendChild(s1);
-    by.appendChild(document.createTextNode(" " + (post.author || "") + " "));
-    var s2 = document.createElement("span");
-    s2.className = "label";
-    s2.textContent = "on";
-    by.appendChild(s2);
-    by.appendChild(document.createTextNode(" " + formatDate(post.published)));
+    var dateP = document.createElement("p");
+    dateP.className = "post-date";
+    dateP.textContent = formatDateLong(post.published);
 
-    hdr.appendChild(kickP);
     hdr.appendChild(h1);
-    hdr.appendChild(by);
+    hdr.appendChild(dateP);
+
+    if (post.author && String(post.author).trim()) {
+      var by = document.createElement("p");
+      by.className = "post-byline";
+      by.appendChild(document.createTextNode("By " + post.author.trim()));
+      hdr.appendChild(by);
+    }
 
     var body = document.createElement("article");
     body.className = "article-body";
@@ -203,7 +217,7 @@
     var backA = document.createElement("a");
     backA.className = "back-link";
     backA.href = "index.html";
-    backA.textContent = "← All posts";
+    backA.textContent = "← Back to log";
     back.appendChild(backA);
 
     root.appendChild(hdr);
@@ -211,15 +225,12 @@
     root.appendChild(back);
 
     document.title =
-      (post.title || "Post") +
-      " — " +
-      (cfg().siteBrand || "") +
-      " " +
-      (cfg().siteTitleSuffix || "").trim();
+      (post.title || "Post") + " — " + siteDisplayName();
   }
 
   function run() {
     applyBranding();
+    renderNav();
     if (document.body.dataset.page === "home") {
       renderHomeFeeds();
     }

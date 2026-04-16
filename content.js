@@ -3,30 +3,27 @@
  *  ADMIN: edit this file to run the blog
  * =============================================================================
  *
- *  1) Site labels — change BLOG_CONFIG (brand, footer, “Popular” order).
- *  2) Posts — add one object to BLOG_POSTS (copy the last entry as a template).
+ *  Site: set BLOG_CONFIG (name, tagline, nav links, footer).
+ *  Posts: add objects to BLOG_POSTS (copy the last entry as a template).
  *
- *  Each post needs:
- *    slug      — short id for the URL (letters, numbers, hyphens only).
- *               Page link becomes: post.html#your-slug
- *    title     — headline
- *    published — date as YYYY-MM-DD
- *    author    — byline name
- *    kicker    — small category line above the title
- *    excerpt   — short plain text for the home page (no HTML)
- *    body      — full article HTML inside backticks `...` (use <p>, <h2>, etc.)
+ *  Each post:
+ *    slug, title, published (YYYY-MM-DD), author, excerpt, body (HTML in `...`)
+ *    kicker — optional small label above the title on the article page only
  *
- *  Popular tab: list slugs in BLOG_CONFIG.popularSlugs in the order you want.
+ *  Home page layout follows the style of personal sites like
+ *  http://www.jeremydlarson.com/ (title → date → excerpt → Read more).
  *
- *  After saving, refresh the browser (index.html or post.html#slug).
- * =============================================================================
+ *  popularSlugs — order for the “Popular” archive tab; omit to mirror newest.
  */
-
 window.BLOG_CONFIG = {
-  siteBrand: "YOUR",
-  siteTitleSuffix: "Blog",
+  siteName: "Your Name",
+  tagline: "Writer / editor",
+  homeDocumentTitle: "Log",
   footerLine: "© 2026 Your Name",
-  /** Slug order for the “Popular” tab (newest tab is always by date). */
+  navLinks: [
+    { label: "Log", href: "index.html" },
+    { label: "About", href: "posts/about.html" },
+  ],
   popularSlugs: ["on-static-sites", "welcome"],
 };
 
@@ -36,7 +33,7 @@ window.BLOG_POSTS = [
     title: "Welcome to the blog",
     published: "2026-04-17",
     author: "Site Staff",
-    kicker: "From the desk",
+    kicker: "",
     excerpt:
       "How this site is structured and how to add posts by editing one file. When you are ready to ship, point any static host at this folder and you are done.",
     body: `
@@ -52,20 +49,20 @@ window.BLOG_POSTS = [
         <ol>
           <li>Open <code>content.js</code>.</li>
           <li>Copy the last post object in <code>BLOG_POSTS</code>.</li>
-          <li>Change <code>slug</code>, dates, kicker, excerpt, and
+          <li>Change <code>slug</code>, dates, excerpt, and
             <code>body</code> HTML.</li>
-          <li>Optional: add the slug to <code>popularSlugs</code> in
-            <code>BLOG_CONFIG</code> if it should appear on the Popular tab.</li>
+          <li>Optional: add the slug to <code>popularSlugs</code> for the
+            Popular tab.</li>
         </ol>
 
         <blockquote>
-          No build step and no database—just edit and refresh. When you outgrow
-          this, you can move the same fields into a static site generator without
-          changing the public layout much.
+          No build step and no database—just edit and refresh. The home
+          page is inspired by the clean layout of sites like
+          <a href="http://www.jeremydlarson.com/">jeremydlarson.com</a>.
         </blockquote>
 
         <p>
-          Update <code>BLOG_CONFIG</code> for your masthead brand and footer line.
+          Update <code>BLOG_CONFIG</code> for your name, tagline, and navigation.
         </p>
       `,
   },

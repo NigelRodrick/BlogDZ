@@ -3,32 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="About this blog." />
+    <meta name="description" content="About this site." />
     <title>About</title>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body data-page="about">
     <header class="site-header">
-      <h1 class="masthead">
-        <a href="../index.html">
-          <span class="masthead-brand" data-site-brand>YOUR</span>
-          <span class="masthead-suffix" data-site-suffix> Blog</span>
-        </a>
+      <h1 class="site-name">
+        <a href="../index.html"><span data-site-name>Your Name</span></a>
       </h1>
-      <div class="header-tools">
-        <a href="../index.html">All posts</a>
-        <a href="about.html" aria-current="page">About</a>
-      </div>
+      <p class="site-tagline" data-site-tagline>Writer / editor</p>
+      <nav class="nav-wrap" aria-label="Site">
+        <ul id="site-nav" class="site-nav"></ul>
+      </nav>
     </header>
 
     <main>
       <header class="article-header">
-        <p class="post-kicker">About</p>
-        <h1>About this site</h1>
-        <p class="post-byline">
-          <span class="label">By</span> Site Staff
-          <span class="label">on</span> Apr 17, 2026
-        </p>
+        <h1>About</h1>
+        <p class="post-date">April 17, 2026</p>
       </header>
 
       <article class="article-body">
@@ -40,50 +33,25 @@
         <p>
           <strong>For people posting:</strong> all articles live in one file,
           <code>content.js</code> in the site root. Copy an existing entry in
-          <code>BLOG_POSTS</code>, change the fields, save, and refresh. The home
-          page and <a href="../post.html#welcome">post.html#welcome</a> style
-          links are built automatically.
+          <code>BLOG_POSTS</code>, change the fields, save, and refresh. The log
+          and <a href="../post.html#welcome">post.html#welcome</a> links are
+          built automatically.
         </p>
         <p>
-          The list layout is inspired by the
-          <a href="https://blog.ted.com/">TED Blog</a>; use your own name and
-          marks, not TED’s branding.
+          The public layout is inspired by the personal site of
+          <a href="http://www.jeremydlarson.com/">Jeremy D. Larson</a>
+          (name, tagline, and log-style entries)—use your own name and content,
+          not his writing.
         </p>
       </article>
 
-      <p><a class="back-link" href="../index.html">← All posts</a></p>
+      <p><a class="back-link" href="../index.html">← Back to log</a></p>
     </main>
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <div class="footer-newsletter">
-          <h2>Sign up for email updates</h2>
-          <p>
-            Get a note when new posts go live. Wire this form to your provider
-            when you are ready.
-          </p>
-          <form class="newsletter-form" action="#" method="post">
-            <label>
-              <span class="visually-hidden">Email</span>
-              <input type="email" name="email" placeholder="Email address" autocomplete="email" />
-            </label>
-            <button type="button">Sign up</button>
-          </form>
-        </div>
-        <div class="footer-follow">
-          <h3>Follow</h3>
-          <ul class="social-list">
-            <li><a href="#">YouTube</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">RSS</a></li>
-          </ul>
-        </div>
         <div class="footer-legal">
           <span data-footer-line>© 2026 Your Name</span>
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Contact</a>
         </div>
       </div>
     </footer>
