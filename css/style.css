@@ -710,3 +710,165 @@ main:not(.blog-main) {
   flex: 1;
   background: var(--bg-page);
 }
+
+/* ——— Author draft form (admin.html) — not part of public blog chrome ——— */
+.admin-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+}
+
+.admin-header {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 1rem;
+}
+
+.admin-back {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+}
+
+.admin-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #2c3e2d;
+  letter-spacing: -0.02em;
+}
+
+.admin-lead {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.admin-main {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 3rem;
+}
+
+.admin-form {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.admin-field {
+  margin-bottom: 1.25rem;
+}
+
+.admin-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+}
+
+.admin-field .req {
+  color: var(--accent-dark);
+}
+
+.admin-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  margin-top: 0.35rem;
+}
+
+.admin-field input[type="text"],
+.admin-field input[type="date"],
+.admin-field input[type="number"],
+.admin-field textarea {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  font: inherit;
+  font-size: 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.admin-field textarea {
+  resize: vertical;
+  min-height: 6rem;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.admin-field--row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 520px) {
+  .admin-field--row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-actions {
+  margin-top: 1.5rem;
+}
+
+.admin-output-section,
+.admin-github-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.admin-output-heading {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e2d;
+}
+
+.admin-steps {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+.admin-output-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-output {
+  margin: 0;
+  padding: 1rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  overflow-x: auto;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.admin-footer {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--ink-faint);
+}

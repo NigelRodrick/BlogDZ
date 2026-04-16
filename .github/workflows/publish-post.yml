@@ -1,0 +1,93 @@
+# Publish a new post by committing to content.js on main. GitHub Pages deploys via pages.yml.
+# Repo → Actions → Publish blog post → Run workflow (needs write access to the repo).
+
+name: Publish blog post
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: Post title
+        required: true
+        type: string
+      slug:
+        description: URL slug (unique, e.g. my-new-post)
+        required: true
+        type: string
+      published:
+        description: Date (YYYY-MM-DD)
+        required: true
+        type: string
+      author:
+        description: Author name
+        required: true
+        type: string
+        default: Dellar Zvinavashe
+      kicker:
+        description: Short label above title (optional)
+        required: false
+        type: string
+        default: ""
+      image:
+        description: Image URL or path (optional)
+        required: false
+        type: string
+        default: ""
+      excerpt:
+        description: Plain-text excerpt for the home page card
+        required: true
+        type: string
+      body_base64:
+        description: Article HTML as UTF-8 Base64 (use admin.html “Copy body as UTF-8 Base64”)
+        required: true
+        type: string
+      read_minutes:
+        description: Read time in minutes (leave empty to omit)
+        required: false
+        type: string
+        default: ""
+      add_to_popular:
+        description: Prepend this slug to popularSlugs
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: publish-blog-post
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Insert post into content.js
+        env:
+          POST_TITLE: ${{ inputs.title }}
+          POST_SLUG: ${{ inputs.slug }}
+          POST_PUBLISHED: ${{ inputs.published }}
+          POST_AUTHOR: ${{ inputs.author }}
+          POST_KICKER: ${{ inputs.kicker }}
+          POST_IMAGE: ${{ inputs.image }}
+          POST_EXCERPT: ${{ inputs.excerpt }}
+          POST_BODY_B64: ${{ inputs.body_base64 }}
+          POST_READ_MINUTES: ${{ inputs.read_minutes }}
+          POST_ADD_POPULAR: ${{ inputs.add_to_popular }}
+        run: node scripts/publish-post.mjs
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content.js
+          git commit -m "Publish post: ${{ inputs.slug }}"
+          git push

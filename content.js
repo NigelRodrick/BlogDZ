@@ -10,6 +10,9 @@
  *  BLOG_POSTS — each post: slug, title, published, author, excerpt, body,
  *    optional image (URL or path), readMinutes (optional; else estimated).
  *  popularSlugs — order for the “Popular” feed.
+ *
+ *  Publish: GitHub → Actions → “Publish blog post” → Run workflow (inserts into this
+ *  file on main; Pages redeploys). Or draft in admin.html and paste into BLOG_POSTS.
  */
 window.BLOG_CONFIG = {
   siteName: "Dellar Zvinavashe",

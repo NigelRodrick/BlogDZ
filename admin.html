@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Draft posts for the blog (authors only)." />
+    <meta name="theme-color" content="#97c693" />
+    <title>Draft a post</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="admin-page">
+    <header class="admin-header">
+      <p class="admin-back">
+        <a href="index.html">← Back to blog</a>
+      </p>
+      <h1 class="admin-title">Draft a post</h1>
+      <p class="admin-lead">
+        Draft posts here. To publish live, use GitHub Actions (below)—no API keys in the
+        browser. You can also <strong>Generate code</strong> and paste into
+        <code>content.js</code> locally. This page is not linked from the public blog.
+      </p>
+    </header>
+
+    <main class="admin-main">
+      <form class="admin-form" id="admin-form" onsubmit="return false;">
+        <div class="admin-field">
+          <label for="f-title">Title <span class="req">*</span></label>
+          <input type="text" id="f-title" name="title" required autocomplete="off" />
+        </div>
+
+        <div class="admin-field">
+          <label for="f-slug">URL slug</label>
+          <input
+            type="text"
+            id="f-slug"
+            name="slug"
+            placeholder="auto from title"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <span class="admin-hint">Letters, numbers, hyphens. Used in post.html#your-slug</span>
+        </div>
+
+        <div class="admin-field admin-field--row">
+          <div>
+            <label for="f-date">Publish date</label>
+            <input type="date" id="f-date" name="date" />
+          </div>
+          <div>
+            <label for="f-read">Read time (minutes)</label>
+            <input type="number" id="f-read" name="read" min="1" placeholder="auto" />
+          </div>
+        </div>
+
+        <div class="admin-field">
+          <label for="f-author">Author</label>
+          <input type="text" id="f-author" name="author" value="Dellar Zvinavashe" />
+        </div>
+
+        <div class="admin-field">
+          <label for="f-kicker">Kicker (optional)</label>
+          <input type="text" id="f-kicker" name="kicker" placeholder="Short label above title on the post page" />
+        </div>
+
+        <div class="admin-field">
+          <label for="f-image">Image URL or path (optional)</label>
+          <input type="text" id="f-image" name="image" placeholder="https://… or images/photo.jpg" />
+        </div>
+
+        <div class="admin-field">
+          <label for="f-excerpt">Excerpt <span class="req">*</span></label>
+          <textarea id="f-excerpt" name="excerpt" rows="3" required placeholder="Short plain text for the card on the home page"></textarea>
+        </div>
+
+        <div class="admin-field">
+          <label for="f-body">Article HTML <span class="req">*</span></label>
+          <textarea
+            id="f-body"
+            name="body"
+            rows="14"
+            required
+            placeholder="Use HTML: &lt;p&gt;…&lt;/p&gt;, &lt;h2&gt;…&lt;/h2&gt;, etc."
+          ></textarea>
+        </div>
+
+        <div class="admin-actions">
+          <button type="button" class="button-primary" id="btn-generate">Generate code</button>
+        </div>
+      </form>
+
+      <section class="admin-github-section" aria-labelledby="gh-publish-heading">
+        <h2 id="gh-publish-heading" class="admin-output-heading">Publish live (GitHub only)</h2>
+        <p class="admin-steps">
+          On GitHub open <strong>Actions</strong> → <strong>Publish blog post</strong> →
+          <strong>Run workflow</strong>. Fill title, slug, date, excerpt, and the other
+          fields to match this form. For <strong>Body (base64)</strong>, click
+          <strong>Copy body as UTF-8 Base64</strong> below (uses your Article HTML field).
+          That commits to <code>main</code>; the site redeploys automatically.
+        </p>
+        <div class="admin-actions">
+          <button type="button" class="button-ghost" id="btn-body-b64">
+            Copy body as UTF-8 Base64
+          </button>
+        </div>
+      </section>
+
+      <section class="admin-output-section" id="admin-output-wrap" hidden>
+        <h2 class="admin-output-heading">Paste this into content.js</h2>
+        <p class="admin-steps">
+          1. Open <code>content.js</code> in your editor.<br />
+          2. Add a comma after the previous post’s closing <code>},</code> if needed.<br />
+          3. Paste the block below inside <code>BLOG_POSTS = [ ... ]</code>.<br />
+          4. Optional: add the <code>slug</code> to <code>popularSlugs</code>.<br />
+          5. Commit and push (or save) to publish.
+        </p>
+        <div class="admin-output-toolbar">
+          <button type="button" class="button-ghost" id="btn-copy">Copy to clipboard</button>
+          <button type="button" class="button-ghost" id="btn-download">Download .txt</button>
+        </div>
+        <pre class="admin-output" id="admin-output"></pre>
+      </section>
+    </main>
+
+    <footer class="admin-footer">
+      <p><a href="index.html">Blog home</a></p>
+    </footer>
+
+    <script src="js/admin.js"></script>
+  </body>
+</html>
