@@ -3,45 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Writing and notes." />
-    <title>Log</title>
+    <meta name="description" content="Blog — writing and notes." />
+    <title>Blog</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body data-page="home">
-    <header class="site-header">
-      <h1 class="site-name">
-        <a href="index.html"><span data-site-name>Dellar Zvinavashe</span></a>
-      </h1>
-      <p class="site-tagline" data-site-tagline>Writer / editor / DJ</p>
-      <nav class="nav-wrap" aria-label="Site">
-        <ul id="site-nav" class="site-nav"></ul>
-      </nav>
+    <div class="top-bar" id="top-bar">
+      <div class="top-bar-inner">
+        <p class="top-bar-phone" id="top-bar-phone-wrap"></p>
+        <a class="top-bar-cta button-ghost" id="top-bar-cta" href="contact.html">Contact</a>
+      </div>
+    </div>
+
+    <header class="site-header site-header--blog">
+      <div class="site-header-inner">
+        <div class="site-brand">
+          <h1 class="site-name">
+            <a href="index.html"><span data-site-name>Dellar Zvinavashe</span></a>
+          </h1>
+          <p class="site-tagline" data-site-tagline>Writer / editor / DJ</p>
+        </div>
+        <nav class="nav-wrap" aria-label="Site">
+          <ul id="site-nav" class="site-nav site-nav--primary"></ul>
+        </nav>
+      </div>
     </header>
 
-    <div class="filter-bar" role="navigation" aria-label="Archive">
+    <section class="blog-hero" aria-labelledby="blog-hero-heading">
+      <div class="blog-hero-inner">
+        <p class="blog-hero-intro" data-hero-intro>
+          Welcome to the blog. Here you’ll find writing, notes, and resources.
+        </p>
+        <p class="blog-hero-actions">
+          <a class="button-primary" id="hero-cta" href="contact.html">Get in touch</a>
+        </p>
+      </div>
+    </section>
+
+    <div class="blog-title-block" id="blog-title-block">
+      <h2 class="blog-split-title" id="blog-hero-heading">
+        <span class="blog-split-title__line" data-blog-title-1>THE</span>
+        <span class="blog-split-title__line blog-split-title__line--accent" data-blog-title-2>BLOG</span>
+      </h2>
+    </div>
+
+    <div class="filter-bar" role="navigation" aria-label="Feed">
       <span class="filter-intro">View · </span>
-      <ul class="filter-list">
-        <li><a href="index.html#newest">Newest</a></li>
-        <li><a href="index.html#popular">Popular</a></li>
+      <ul class="filter-list" id="feed-switcher">
+        <li><a href="index.html?feed=newest&amp;page=1" data-feed="newest">Newest</a></li>
+        <li><a href="index.html?feed=popular&amp;page=1" data-feed="popular">Popular</a></li>
       </ul>
     </div>
 
-    <main>
+    <main class="blog-main">
       <noscript>
-        <p class="article-body">
+        <p class="article-body blog-noscript">
           Turn on JavaScript to load posts from <code>content.js</code>, or open
           <a href="post.html#welcome">post.html#welcome</a>.
         </p>
       </noscript>
 
-      <section id="newest" class="feed" aria-label="Newest posts">
-        <ul id="feed-newest" class="post-list"></ul>
-      </section>
-
-      <section id="popular" class="feed" aria-label="Popular posts">
-        <ul id="feed-popular" class="post-list"></ul>
-      </section>
+      <div class="blog-feed-wrap">
+        <ul id="blog-feed" class="post-grid" aria-live="polite"></ul>
+        <nav class="pagination" id="blog-pagination" aria-label="Blog pages"></nav>
+      </div>
     </main>
+
+    <section class="footer-cta-strip" id="footer-cta-strip" hidden>
+      <p class="footer-cta-strip__text" data-footer-cta></p>
+    </section>
 
     <footer class="site-footer">
       <div class="footer-inner">

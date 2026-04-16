@@ -1,32 +1,48 @@
 /**
  * =============================================================================
- *  ADMIN: edit this file to run the blog
+ *  ADMIN: edit this file
  * =============================================================================
+ *  Layout follows the blog structure used at
+ *  https://www.revivetherapeuticservices.com/mentalhealthblog
+ *  (top bar, hero + CTA, split title, cards with image + meta + pagination).
  *
- *  Site: set BLOG_CONFIG (name, tagline, nav links, footer, developerCredit).
- *  Nav order mirrors jeremydlarson.com: Writing Clips, Photography, Log, About, Contact.
- *  Posts: add objects to BLOG_POSTS (copy the last entry as a template).
- *
- *  Each post:
- *    slug, title, published (YYYY-MM-DD), author, excerpt, body (HTML in `...`)
- *    kicker — optional small label above the title on the article page only
- *
- *  Home page layout follows the style of personal sites like
- *  http://www.jeremydlarson.com/ (title → date → excerpt → Read more).
- *
- *  popularSlugs — order for the “Popular” archive tab; omit to mirror newest.
+ *  BLOG_CONFIG — site chrome, hero, footer CTA, pagination size.
+ *  BLOG_POSTS — each post: slug, title, published, author, excerpt, body,
+ *    optional image (URL or path), readMinutes (optional; else estimated).
+ *  popularSlugs — order for the “Popular” feed.
  */
 window.BLOG_CONFIG = {
   siteName: "Dellar Zvinavashe",
   tagline: "Writer / editor / DJ",
-  homeDocumentTitle: "Log",
+  homeDocumentTitle: "Blog",
   footerLine: "© 2026 Dellar Zvinavashe",
-  /** Shown under the copyright line site-wide. */
   developerCredit: "Developed by Fidinsky Tech Solutions",
+
+  /** Top bar (like Revive’s phone + action link) */
+  topPhone: "",
+  topPhoneTel: "",
+  topCtaLabel: "Contact",
+  topCtaHref: "contact.html",
+
+  /** Hero welcome + primary button */
+  heroIntro:
+    "Welcome to the blog. Here you’ll find writing, notes, and resources—ideas worth sharing and returning to.",
+  heroCtaLabel: "Get in touch",
+  heroCtaHref: "contact.html",
+
+  /** Large split headline (two lines). Leave line2 empty to hide second line. */
+  blogTitleLine1: "THE",
+  blogTitleLine2: "BLOG",
+
+  /** Optional strip above the copyright */
+  footerCtaLine: "",
+
+  postsPerPage: 6,
+
   navLinks: [
     { label: "Writing Clips", href: "writing-clips.html" },
     { label: "Photography", href: "photography.html" },
-    { label: "Log", href: "index.html" },
+    { label: "Blog", href: "index.html" },
     { label: "About", href: "about.html" },
     { label: "Contact", href: "contact.html" },
   ],
@@ -40,6 +56,8 @@ window.BLOG_POSTS = [
     published: "2026-04-17",
     author: "Dellar Zvinavashe",
     kicker: "",
+    image: "",
+    readMinutes: 4,
     excerpt:
       "How this site is structured and how to add posts by editing one file. When you are ready to ship, point any static host at this folder and you are done.",
     body: `
@@ -55,20 +73,16 @@ window.BLOG_POSTS = [
         <ol>
           <li>Open <code>content.js</code>.</li>
           <li>Copy the last post object in <code>BLOG_POSTS</code>.</li>
-          <li>Change <code>slug</code>, dates, excerpt, and
-            <code>body</code> HTML.</li>
-          <li>Optional: add the slug to <code>popularSlugs</code> for the
-            Popular tab.</li>
+          <li>Set <code>image</code> (optional URL), <code>readMinutes</code> or rely on auto estimate.</li>
         </ol>
 
         <blockquote>
-          No build step and no database—just edit and refresh. The home
-          page is inspired by the clean layout of sites like
-          <a href="http://www.jeremydlarson.com/">jeremydlarson.com</a>.
+          The blog index uses a card grid, hero, and pagination pattern similar to
+          professional blog hubs—configure it all in <code>BLOG_CONFIG</code>.
         </blockquote>
 
         <p>
-          Update <code>BLOG_CONFIG</code> for your name, tagline, and navigation.
+          Update <code>BLOG_CONFIG</code> for hero text, phone bar, and split title.
         </p>
       `,
   },
@@ -78,6 +92,8 @@ window.BLOG_POSTS = [
     published: "2026-04-17",
     author: "Dellar Zvinavashe",
     kicker: "Notes",
+    image: "",
+    readMinutes: 3,
     excerpt:
       "Frameworks are useful when the product needs them. For a personal blog, the interesting part is the writing—not the deployment graph.",
     body: `
