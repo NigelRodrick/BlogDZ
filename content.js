@@ -14,7 +14,7 @@
 window.BLOG_CONFIG = {
   siteName: "Dellar Zvinavashe",
   tagline: "Writer / editor / DJ",
-  homeDocumentTitle: "Blog",
+  homeDocumentTitle: "Mental Health Blog",
   footerLine: "© 2026 Dellar Zvinavashe",
   developerCredit: "Developed by Fidinsky Tech Solutions",
 
@@ -24,18 +24,19 @@ window.BLOG_CONFIG = {
   topCtaLabel: "Contact",
   topCtaHref: "contact.html",
 
-  /** Hero welcome + primary button */
+  /** Hero welcome + primary button (Revive-style welcome strip) */
   heroIntro:
-    "Welcome to the blog. Here you’ll find writing, notes, and resources—ideas worth sharing and returning to.",
-  heroCtaLabel: "Get in touch",
+    "Welcome to the mental health blog! Here you can find self-care tips and ideas. We share insights on mental wellness and practical ways to support positive mental health—so readers have the resources they need to thrive.",
+  heroCtaLabel: "Book appointment",
   heroCtaHref: "contact.html",
 
-  /** Large split headline (two lines). Leave line2 empty to hide second line. */
-  blogTitleLine1: "THE",
-  blogTitleLine2: "BLOG",
+  /** Large split headline — same pattern as Revive (line 1 dark, line 2 brand green) */
+  blogTitleLine1: "MENTAL",
+  blogTitleLine2: "HEALTH BLOG",
 
-  /** Optional strip above the copyright */
-  footerCtaLine: "",
+  /** Strip above footer (Revive-style tagline); empty string hides it */
+  footerCtaLine:
+    "Empower your mental wellbeing—take the next step.",
 
   postsPerPage: 6,
 
