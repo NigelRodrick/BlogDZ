@@ -207,6 +207,19 @@
         contactPhoneWrap.textContent = phoneDisplay;
       }
     }
+
+    var contactEmailWrap = document.getElementById("contact-email-wrap");
+    if (contactEmailWrap) {
+      contactEmailWrap.replaceChildren();
+      var em = c.contactEmail && String(c.contactEmail).trim();
+      if (em) {
+        var ma = document.createElement("a");
+        ma.href = "mailto:" + em;
+        ma.textContent = em;
+        contactEmailWrap.appendChild(ma);
+      }
+    }
+
     if (topBar) {
       var showTop =
         (c.topPhone && c.topPhone.trim()) ||

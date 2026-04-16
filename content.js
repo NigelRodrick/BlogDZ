@@ -6,7 +6,7 @@
  *  Core focus: highlight issues that happen in life (stress, change, work, etc.).
  *  Layout: top bar, hero + CTA, split title, card grid + meta + pagination.
  *
- *  BLOG_CONFIG — site chrome, hero, footer CTA, pagination size.
+ *  BLOG_CONFIG — site chrome, contactEmail, hero, footer CTA, pagination size.
  *  BLOG_POSTS — each post: slug, title, published, author, excerpt, body,
  *    optional image (URL or path), readMinutes (optional; else estimated).
  *  popularSlugs — order for the “Popular” feed.
@@ -23,6 +23,9 @@ window.BLOG_CONFIG = {
   topPhoneTel: "+263774073707",
   topCtaLabel: "Contact",
   topCtaHref: "contact.html",
+
+  /** Shown on the Contact page */
+  contactEmail: "zvinavashe.d@gmail.com",
 
   /** Hero — core idea: life issues, honestly */
   heroIntro:
