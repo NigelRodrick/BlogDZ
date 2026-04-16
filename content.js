@@ -2,6 +2,7 @@
  * =============================================================================
  *  ADMIN: edit this file
  * =============================================================================
+ *  Theme colors live in css/style.css (:root) — Revive-style greens #97C693 / #F4FFF7.
  *  Layout follows the blog structure used at
  *  https://www.revivetherapeuticservices.com/mentalhealthblog
  *  (top bar, hero + CTA, split title, cards with image + meta + pagination).
