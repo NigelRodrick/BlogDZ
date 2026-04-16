@@ -192,6 +192,21 @@
         phoneWrap.appendChild(pa);
       }
     }
+
+    var contactPhoneWrap = document.getElementById("contact-phone-wrap");
+    if (contactPhoneWrap) {
+      contactPhoneWrap.replaceChildren();
+      var phoneDisplay = c.topPhone && String(c.topPhone).trim();
+      var phoneTel = c.topPhoneTel && String(c.topPhoneTel).trim();
+      if (phoneDisplay && phoneTel) {
+        var ca = document.createElement("a");
+        ca.href = "tel:" + phoneTel.replace(/\s/g, "");
+        ca.textContent = phoneDisplay;
+        contactPhoneWrap.appendChild(ca);
+      } else if (phoneDisplay) {
+        contactPhoneWrap.textContent = phoneDisplay;
+      }
+    }
     if (topBar) {
       var showTop =
         (c.topPhone && c.topPhone.trim()) ||

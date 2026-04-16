@@ -19,9 +19,9 @@ window.BLOG_CONFIG = {
   footerLine: "© 2026 Dellar Zvinavashe",
   developerCredit: "Developed by Fidinsky Tech Solutions",
 
-  /** Top bar (like Revive’s phone + action link) */
-  topPhone: "",
-  topPhoneTel: "",
+  /** Top bar — display text and tel: href (digits / + only in Tel) */
+  topPhone: "+263 774 073 707",
+  topPhoneTel: "+263774073707",
   topCtaLabel: "Contact",
   topCtaHref: "contact.html",
 
