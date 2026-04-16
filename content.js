@@ -17,10 +17,10 @@
  *  popularSlugs — order for the “Popular” archive tab; omit to mirror newest.
  */
 window.BLOG_CONFIG = {
-  siteName: "Your Name",
+  siteName: "Dellar Zvinavashe",
   tagline: "Writer / editor / DJ",
   homeDocumentTitle: "Log",
-  footerLine: "© 2026 Your Name",
+  footerLine: "© 2026 Dellar Zvinavashe",
   navLinks: [
     { label: "Writing Clips", href: "writing-clips.html" },
     { label: "Photography", href: "photography.html" },
@@ -36,7 +36,7 @@ window.BLOG_POSTS = [
     slug: "welcome",
     title: "Welcome to the blog",
     published: "2026-04-17",
-    author: "Site Staff",
+    author: "Dellar Zvinavashe",
     kicker: "",
     excerpt:
       "How this site is structured and how to add posts by editing one file. When you are ready to ship, point any static host at this folder and you are done.",
@@ -74,7 +74,7 @@ window.BLOG_POSTS = [
     slug: "on-static-sites",
     title: "Why static HTML still wins",
     published: "2026-04-17",
-    author: "Site Staff",
+    author: "Dellar Zvinavashe",
     kicker: "Notes",
     excerpt:
       "Frameworks are useful when the product needs them. For a personal blog, the interesting part is the writing—not the deployment graph.",
